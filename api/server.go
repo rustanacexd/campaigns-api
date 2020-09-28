@@ -200,20 +200,20 @@ func newcampaignHandlers() *campaignHandlers {
 		store: map[int]Campaign{
 			1: Campaign{
 				1,
-				"mam,e",
-				"status",
+				"Campaign 1",
+				"status 1",
 				time.Now(),
 			},
 			2: Campaign{
 				2,
-				"mam,e",
-				"status",
+				"Campaign 2",
+				"status 2",
 				time.Now(),
 			},
 			3: Campaign{
 				3,
-				"mam,e",
-				"status",
+				"Campaign 3",
+				"status 3",
 				time.Now(),
 			},
 		},
