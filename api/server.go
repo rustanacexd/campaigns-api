@@ -24,6 +24,10 @@ type campaignHandlers struct {
 }
 
 func (h *campaignHandlers) campaigns(w http.ResponseWriter, r *http.Request) {
+	setupResponse(&w, r)
+	if (*r).Method == "OPTIONS" {
+		return
+	}
 	switch r.Method {
 	case "GET":
 		h.get(w, r)
@@ -117,6 +121,9 @@ func (h *campaignHandlers) post(w http.ResponseWriter, r *http.Request) {
 	campaign.ID = lastCampaign.ID + 1
 	h.store[campaign.ID] = campaign
 	defer h.Unlock()
+
+	w.Header().Add("content-type", "application/json")
+	w.WriteHeader(http.StatusCreated)
 }
 
 func (h *campaignHandlers) remove(w http.ResponseWriter, r *http.Request) {
@@ -214,6 +221,12 @@ func newcampaignHandlers() *campaignHandlers {
 
 }
 
+func setupResponse(w *http.ResponseWriter, req *http.Request) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+}
+
 func main() {
 	campaignHandlers := newcampaignHandlers()
 	http.HandleFunc("/campaigns/", campaignHandlers.campaigns)
@@ -221,4 +234,5 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
 }
