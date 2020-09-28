@@ -13,8 +13,7 @@ requirements:
 * [x] `POST /campaigns/` returns status 415 if content is not `application/json`
 * [x] `PUT /campaigns/{id}/` returns status 415 if content is not `application/json`
 * [x] `PUT /campaigns/{id}/` update an existing campaign
-* [x] `DELETE /campaigns/{id}/` returns status 415 if content is not `application/json`
-* [x] `DELETE /campaigns/{id}/` delete an existin campaign
+* [x] `DELETE /campaigns/{id}/` delete an existing campaign
 
 
 

@@ -127,13 +127,6 @@ func (h *campaignHandlers) post(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *campaignHandlers) remove(w http.ResponseWriter, r *http.Request) {
-	ct := r.Header.Get("content-type")
-	if ct != "application/json" {
-		w.WriteHeader(http.StatusUnsupportedMediaType)
-		w.Write([]byte(fmt.Sprintf("need content-type 'application/json', but got '%s'", ct)))
-		return
-	}
-
 	parts := strings.Split(r.URL.String(), "/")
 	part, err := strconv.Atoi(parts[2])
 	if err != nil {
